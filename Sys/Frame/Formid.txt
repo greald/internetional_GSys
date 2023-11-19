@@ -1,0 +1,53 @@
+Formid gives a codestring identifying a requested (html)-form.
+
+Formid serves 
+1 - to prevend multiple input by users;
+2 - to prevend csrf;
+3 - to keep robots out, like captcha does.
+
+basic use: (new Formid)->run();
+returns bool TRUE 
+  if $_POST['formid'] exists 
+  and is valid and no robot, apparently;
+returns array of html-form-input attributes
+  otherwise.
+
+In class "Formid":
+
+- method setFormid() sets the unique codestring, property mFormid;
+
+- property mFormid consists of a part DOCID, 
+identifying the document which may hold one or more (html)-forms,
+and a part, identifying any form inside the document;
+
+- method getFormid() gets property mFormid;
+
+- method GenerateUnique() generates a new instance of Formid,
+  stores it's values in database,
+  returns array with html form input attributes,
+  or ["no formid"] as an error sign;
+
+- method punchTicket() catches $_POST['formid'],
+checks whether its (still) valid in database,
+if so : deletes record holding formid,
+  returns approval for further data processing;
+else  : returns denial for further data processing;
+thus serving function 1,
+and  serving function 2.
+
+Humans need seconds to minutes to respond to a form,
+which robots can do in miliseconds. 
+To keep robots out of database, serving function 3,
+POSTs (and GETs) returned too soon, are simply ignored.
+
+Therefore
+- property mFirst is set by setFirst() in generating new formid
+and in  in method noRobot(): 
+- property mLast is attributed with every incoming POST or GET
+and FormidUpdated, 
+but if time differences are too short, further dataprocessing is blocked.
+
+- method prune() removes formids from database that are overdue.
+
+
+Formid Procedure
