@@ -46,7 +46,8 @@ class ModelPDO extends PDO
     
   public function Q2Assoc($Query)
 	{
-		if($Ruery = $this->query($Query)){;}else{return [];}
+//	echo "\n<br/>\n<br/>".__METHOD__.__LINE__." Query ".$Query;
+    if($Ruery = $this->query($Query)){;}else{return [];}
 		$uery=[]; while($Suery = $Ruery->fetch(PDO::FETCH_ASSOC))
 		{
 			$uery[]=$Suery;
