@@ -1,0 +1,7 @@
+<?php
+$variabele = __DIR__."var";
+echo "<br/>". $variabele;
+$$variabele = "geldige variabele";
+echo "<br/>". $$variabele;
+echo "<br/>". "\u{40}";
+
