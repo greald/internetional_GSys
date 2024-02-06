@@ -38,7 +38,7 @@ class Indent
 class View
 {
 // @param viewname: string view file's path, stripped from extension .view.php
-// @param viewvars; associative array of variables to be called in viewfile
+// @param viewvars: associative array of variables to be called in viewfile
 // with viewvars-key 'includes' RESERVED for cascading View instances to be incorporated
 // @param ext: string, defaults to ".view.php"
 

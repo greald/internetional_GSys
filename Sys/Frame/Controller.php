@@ -7,14 +7,12 @@ require_once "View.php";
 
 class Controller
 {
-  public function index($R="FF",$G="FF",$B="FF") //"44","88","99" // "a1","c3","cc" //"d0","e1","e5"
+  public function index() //"44","88","99" // "a1","c3","cc" //"d0","e1","e5"
   {
     // your controller index method will override parent's
     $projectpath = explode( DIRECTORY_SEPARATOR, APPROOT );
     $projectname = array_pop($projectpath);
-    echo "<!DOCTYPE html><html><head><style>body {background-color: #".
-      $R.$G.$B.
-      ";}</style></head><body><h1>".$projectname."</h1>";
+    echo "<!DOCTYPE html><html><head><style>body {background-color: #abcdef;}</style></head><body><h1>".$projectname."</h1>";
     echo "<sup style=\"position: fixed; bottom:1em; right:1em\">Internetional GSys&copy;GHvernuft.nl</sup></body></html>";
   }
   

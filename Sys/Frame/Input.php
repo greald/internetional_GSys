@@ -27,7 +27,7 @@ class Input
   
   static function whitelist( $verb, $keyname )
   {
-  // @param $verb: "get | "post" | "request"
+  // @param $verb: "get" | "post" | "request"
   // @param $keyname: string
     $varkeykeys = array_keys(self::VARKEYS);
   	$varkeys = ["post"=>$varkeykeys[0],"get"=>$varkeykeys[1],"request"=>$varkeykeys[2]];
@@ -67,20 +67,19 @@ class Input
   static private $post =[];
   static private $get =[];
   static private $request =[];
-//  static public function get_post(){ return self::$post;  }
   static public function get_( $varname ){ return self::$$varname; }
   
   static public function quarantine()
   {
   // quarantines $_POST, $_GET, $_REQUEST in Input::$rawpost, Input::$rawget, Input::$rawrequest
   // neutralizes and presents them with Input::get_('post'), Input::get_('get'), Input::get_('request')
-  
+    
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   // TO BE COMPLETED WITH QUARANTINING non-whitelisted KEYS
   // first to be  cleared with  cleanseKeys
   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     
-    // do this only once
+    // to do this only once
     if ($_POST    == self::EMPTY
     ||  $_GET     == self::EMPTY
     ||  $_REQUEST == self::EMPTY)
@@ -111,25 +110,21 @@ class Input
   }
   
 // Both methods sanitize() and validate() perform exactly the same
-// but validate() returns bool and sanitize() returns unrestricted
-// so validate() is just a redirect to sanitize(), with output restricted to bool
+// but validate() returns bool
+// and sanitize() returns unrestricted
+// so validate() is just a redirect to sanitize(), but callback output restricted to bool
  
-//static function sanitize($classname, $callback, $postkey) : bool
   static function sanitize($classname, $callback, $varname, $varkey) // : unrestricted
   {
+//  echo "\n<br/>".__METHOD__.__LINE__." callback and pararr ";var_dump([$classname, $callback, $varname, $varkey]);
     return class_exists($classname) 
-//    ? call_user_func_array([$classname, $callback],[self::get_safepost()[$postkey]])
       ? call_user_func_array([$classname, $callback],[self::get_($varname)[$varkey]])
-//    : call_user_func_array(             $callback ,[self::get_safepost()[$postkey]]);
       : call_user_func_array(             $callback ,[self::get_($varname)[$varkey]]);
   }
   
-//static function validate($classname, $callback, $postkey)
   static function validate($classname, $callback, $varname, $varkey) : bool
   {
-  //return self::sanitize($classname, $callback, $postkey);
     return self::sanitize($classname, $callback, $varname, $varkey);
-//    return call_user_func_array([$classname, $callback],[self::$safepost[$postkey]]);
   }
   
   static function add2postORI($classname, array $callbacks, $postkey)
@@ -199,6 +194,6 @@ class Input
   {  
   // @param var: array | string
     require_once SYSROOT."/Lib/inputFilters.php";    
-    return sanitizer::mbVar( $var );
+    return Sanitizer::mbVar( $var );
   }
 }

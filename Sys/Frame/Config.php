@@ -19,7 +19,10 @@
   $routes = [];
   if(DEVELOPMENT)
   {
-    $routes['sdk-form'] = ['controller' => '../Sys/Frame/SDK/FormSetup', 'method' => 'createForm'];
+    $routes['sdk-project'] = ['controller' => '../Sys/SDK/dashboard', 'method' => 'projectsetup'];
+    $routes['sdk-form']    = ['controller' => '../Sys/SDK/dashboard', 'method' => 'formsetup'];
+    $routes['sdk-page']    = ['controller' => '../Sys/SDK/dashboard', 'method' => 'pagesetup'];
+    $routes['sdk']         = ['controller' => '../Sys/SDK/dashboard', 'method' => 'index'];
   }
 
   function route()
@@ -67,6 +70,7 @@
     {
 //if(function_exists("peek")){peek(realpath(APPROOT."/".$controller.".php"), NULL, " controller path: ");}
       $controllerfilepath = realpath(APPROOT."/".$controller.".php");
+//if (function_exists("peek")){peek($controllerfilepath, NULL, " controller path: ");}
       require_once $controllerfilepath;
       $expl = explode(GSYS_DIR_SEP, $controller);
       $controller = array_pop($expl);
@@ -87,6 +91,7 @@
     {    
       // https://www.php.net/manual/en/functions.variable-functions.php
       // https://www.php.net/manual/en/functions.arguments.php#functions.variable-arg-list
+//if (function_exists("peek")){peek($cntrparams, NULL, " cntrparams: ");}
       return (new $controller)->$cntrmethod(...$cntrparams);
     }
   }
