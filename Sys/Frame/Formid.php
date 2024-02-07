@@ -86,6 +86,7 @@ class Formid extends Formidtable
     // run the gauntlet
     if ( ! empty($inputgetpost[self::SCHERMNAMEN['formid']]) )
     { // incoming from request
+//    echo "\n<br/>".__METHOD__.__LINE__." formid inputgetpost:\n<br/>";var_dump($inputgetpost[self::SCHERMNAMEN['formid']]);
       if (! $this->findrow( $inputgetpost[self::SCHERMNAMEN['formid']] )==[])
       {
         if ($this->instantiate())
@@ -97,7 +98,7 @@ class Formid extends Formidtable
               $this->punchticket();
               if ( $this->approved)
               {
-                // echo "\n<br/>".__METHOD__.__LINE__." Formid after passing running the gauntlet:\n<br/>";var_dump($this);
+//              echo "\n<br/>".__METHOD__.__LINE__." Formid after passing running the gauntlet:\n<br/>";var_dump($this);
                 return $this;
               }
             }
@@ -319,6 +320,11 @@ class Formidcontroller extends Controller
 //    (new Formidview)->testview( $formidinst->formid );
       (new Formidview)->screenline([ Formid::SCHERMNAMEN['formid'] => $formidinst->formid ]);
     }
+  }
+  
+  public function formElement()
+  {
+    
   }
   
   public function test()
