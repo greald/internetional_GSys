@@ -17,7 +17,7 @@ class Dashboard extends Controller
   
   public function formsetup()
   {
-    require_once SYSROOT.DIRECTORY_SEPARATOR."Frame".DIRECTORY_SEPARATOR."Formcontroller.php";
+    require_once SYSROOT.DIRECTORY_SEPARATOR."Frame".DIRECTORY_SEPARATOR."Formcontrol.php";
     $this->viewfile(__DIR__.DIRECTORY_SEPARATOR.'FormSetup.view',[]);
   }
   

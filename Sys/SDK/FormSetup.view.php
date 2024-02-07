@@ -101,7 +101,7 @@ $inputTypesList   = a2s(Formelement::INPUTTYPES);
         // lopen deze new formid aanroepen elkaar in de wielen?
         // C:\xampp74\htdocs\ghvSys\Sys\Frame\SDK\FormSetup.view.php(97): '\$Fformid = (new Formid)->run();\n' +
         // want in r85 is, met new Formcontroller, new Formid al aangeroepen. Dus door norobot() afgevangen
-        // C:\xampp74\htdocs\ghvSys\Sys\Frame\Formcontroller.php(148): $formid = new Formid;
+        // C:\xampp74\htdocs\ghvSys\Sys\Frame\Formcontrol.php(148): $formid = new Formid;
         
 //          '//echo "FormSetup.view.php hard 98 Fformid ";var_dump( \$Fformid );\n' +
         'if ( is_string('+ instance +'run))\n' +
